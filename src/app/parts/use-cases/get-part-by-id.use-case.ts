@@ -1,7 +1,7 @@
-import { PartProps } from '@/src/domain/entities/part';
-import type { PartRepository } from '@/src/domain/repositories/part.repository';
-import { PART_REPOSITORY } from '@/src/domain/repositories/part.repository.token';
-import { Injectable, Inject, NotFoundException } from '@nestjs/common';
+import { PartProps } from "@/src/domain/entities/part";
+import type { PartRepository } from "@/src/domain/repositories/part.repository";
+import { PART_REPOSITORY } from "@/src/domain/repositories/part.repository.token";
+import { Injectable, Inject, NotFoundException } from "@nestjs/common";
 
 export interface GetPartByIdUseCaseInput {
   id: string;

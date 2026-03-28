@@ -1,7 +1,7 @@
 export enum PartCategory {
-  ENGINE = 'engine',
-  TRANSMISSION = 'transmission',
-  SUSPENSION = 'suspension',
+  ENGINE = "engine",
+  TRANSMISSION = "transmission",
+  SUSPENSION = "suspension",
 }
 
 export enum CriticalityLevel {
@@ -27,7 +27,7 @@ export interface PartProps {
 }
 
 export type PartUpdateProps = Partial<
-  Omit<PartProps, 'id' | 'createdAt' | 'updatedAt'>
+  Omit<PartProps, "id" | "createdAt" | "updatedAt">
 >;
 
 export class Part {

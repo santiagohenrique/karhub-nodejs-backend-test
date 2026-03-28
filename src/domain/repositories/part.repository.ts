@@ -1,11 +1,14 @@
 import { PartCategory, Part } from "@/src/domain/entities/part";
-import { PaginationParams, PaginatedData } from "@/src/shared/pagination/pagination.types";
+import {
+  PaginationParams,
+  PaginatedData,
+} from "@/src/shared/pagination/pagination.types";
 
 export interface PartFilters {
   category?: PartCategory;
 }
 
-export interface FindAllPartsQuery extends PartFilters, PaginationParams { }
+export interface FindAllPartsQuery extends PartFilters, PaginationParams {}
 
 export type FindAllPartsResult = PaginatedData<Part>;
 

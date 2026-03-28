@@ -1,8 +1,8 @@
-import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { PartEntity } from '../../../domain/entities/typeorm/part.entity';
-import { PART_REPOSITORY } from '../../../domain/repositories/part.repository.token';
-import { TypeOrmPartRepository } from './repositories/typeorm-part.repository';
+import { Module } from "@nestjs/common";
+import { TypeOrmModule } from "@nestjs/typeorm";
+import { PartEntity } from "@/src/domain/entities/typeorm/part.entity";
+import { PART_REPOSITORY } from "@/src/domain/repositories/part.repository.token";
+import { TypeOrmPartRepository } from "@/src/infra/persistence/typeorm/repositories/typeorm-part.repository";
 
 @Module({
   imports: [TypeOrmModule.forFeature([PartEntity])],

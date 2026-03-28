@@ -1,18 +1,18 @@
-import { PartProps } from '@/src/domain/entities/part';
+import { PartProps } from "@/src/domain/entities/part";
 import type {
   PartFilters,
   PartRepository,
-} from '@/src/domain/repositories/part.repository';
-import { PART_REPOSITORY } from '@/src/domain/repositories/part.repository.token';
+} from "@/src/domain/repositories/part.repository";
+import { PART_REPOSITORY } from "@/src/domain/repositories/part.repository.token";
 import {
   DEFAULT_LIMIT,
   DEFAULT_PAGE,
-} from '@/src/shared/pagination/pagination.constants';
+} from "@/src/shared/pagination/pagination.constants";
 import type {
   PaginatedResponse,
   PaginationInput,
-} from '@/src/shared/pagination/pagination.types';
-import { Injectable, Inject } from '@nestjs/common';
+} from "@/src/shared/pagination/pagination.types";
+import { Injectable, Inject } from "@nestjs/common";
 
 export interface ListPartsUseCaseInput extends PartFilters, PaginationInput {}
 

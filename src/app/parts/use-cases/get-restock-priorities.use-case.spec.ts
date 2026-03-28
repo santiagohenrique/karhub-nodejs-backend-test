@@ -1,9 +1,18 @@
 import { GetRestockPrioritiesUseCase } from "@/src/app/parts/use-cases/get-restock-priorities.use-case";
-import { Part, PartProps, PartCategory, CriticalityLevel } from "@/src/domain/entities/part";
-import { PartRepository, FindAllPartsQuery, FindAllPartsResult } from "@/src/domain/repositories/part.repository";
+import {
+  Part,
+  PartProps,
+  PartCategory,
+  CriticalityLevel,
+} from "@/src/domain/entities/part";
+import {
+  PartRepository,
+  FindAllPartsQuery,
+  FindAllPartsResult,
+} from "@/src/domain/repositories/part.repository";
 
 class InMemoryPartRepository implements PartRepository {
-  constructor(private readonly parts: Part[]) { }
+  constructor(private readonly parts: Part[]) {}
 
   create(part: Part): Promise<Part> {
     this.parts.push(part);
@@ -50,7 +59,7 @@ class InMemoryPartRepository implements PartRepository {
 function makePart(overrides: Partial<PartProps> = {}): Part {
   return new Part({
     id: overrides.id ?? crypto.randomUUID(),
-    name: overrides.name ?? 'Part',
+    name: overrides.name ?? "Part",
     category: overrides.category ?? PartCategory.ENGINE,
     currentStock: overrides.currentStock ?? 10,
     minimumStock: overrides.minimumStock ?? 20,
@@ -63,11 +72,11 @@ function makePart(overrides: Partial<PartProps> = {}): Part {
   });
 }
 
-describe('GetRestockPrioritiesUseCase', () => {
-  it('returns only parts that need restock with correct projectedStock and urgencyScore', async () => {
+describe("GetRestockPrioritiesUseCase", () => {
+  it("returns only parts that need restock with correct projectedStock and urgencyScore", async () => {
     const restockPart = makePart({
-      id: 'part-1',
-      name: 'Filtro de Oleo X',
+      id: "part-1",
+      name: "Filtro de Oleo X",
       currentStock: 15,
       minimumStock: 20,
       averageDailySales: 4,
@@ -75,8 +84,8 @@ describe('GetRestockPrioritiesUseCase', () => {
       criticalityLevel: CriticalityLevel.MEDIUM,
     });
     const healthyPart = makePart({
-      id: 'part-2',
-      name: 'Peca Saudavel',
+      id: "part-2",
+      name: "Peca Saudavel",
       currentStock: 40,
       minimumStock: 10,
       averageDailySales: 1,
@@ -91,8 +100,8 @@ describe('GetRestockPrioritiesUseCase', () => {
 
     expect(result.priorities).toEqual([
       {
-        partId: 'part-1',
-        name: 'Filtro de Oleo X',
+        partId: "part-1",
+        name: "Filtro de Oleo X",
         currentStock: 15,
         projectedStock: -5,
         minimumStock: 20,
@@ -101,10 +110,10 @@ describe('GetRestockPrioritiesUseCase', () => {
     ]);
   });
 
-  it('applies tie-break by criticalityLevel and averageDailySales', async () => {
+  it("applies tie-break by criticalityLevel and averageDailySales", async () => {
     const highCriticality = makePart({
-      id: 'uuid-c',
-      name: 'part-c',
+      id: "uuid-c",
+      name: "part-c",
       minimumStock: 10,
       currentStock: 10,
       averageDailySales: 1,
@@ -112,8 +121,8 @@ describe('GetRestockPrioritiesUseCase', () => {
       criticalityLevel: CriticalityLevel.VERY_HIGH,
     });
     const highSales = makePart({
-      id: 'uuid-b',
-      name: 'part-b',
+      id: "uuid-b",
+      name: "part-b",
       minimumStock: 10,
       currentStock: 20,
       averageDailySales: 3,
@@ -121,8 +130,8 @@ describe('GetRestockPrioritiesUseCase', () => {
       criticalityLevel: CriticalityLevel.HIGH,
     });
     const lowSales = makePart({
-      id: 'uuid-a',
-      name: 'part-a',
+      id: "uuid-a",
+      name: "part-a",
       minimumStock: 10,
       currentStock: 15,
       averageDailySales: 2,
@@ -140,16 +149,16 @@ describe('GetRestockPrioritiesUseCase', () => {
     const result = await useCase.execute();
 
     expect(result.priorities.map((item) => item.partId)).toEqual([
-      'uuid-c',
-      'uuid-b',
-      'uuid-a',
+      "uuid-c",
+      "uuid-b",
+      "uuid-a",
     ]);
   });
 
-  it('applies alphabetical order when all other tie-break criteria are equal', async () => {
+  it("applies alphabetical order when all other tie-break criteria are equal", async () => {
     const alpha = makePart({
-      id: 'uuid-alpha',
-      name: 'Alpha',
+      id: "uuid-alpha",
+      name: "Alpha",
       minimumStock: 10,
       currentStock: 16,
       averageDailySales: 2,
@@ -158,8 +167,8 @@ describe('GetRestockPrioritiesUseCase', () => {
     });
 
     const zebra = makePart({
-      id: 'uuid-zebra',
-      name: 'Zebra',
+      id: "uuid-zebra",
+      name: "Zebra",
       minimumStock: 10,
       currentStock: 16,
       averageDailySales: 2,
@@ -173,15 +182,15 @@ describe('GetRestockPrioritiesUseCase', () => {
     const result = await useCase.execute();
 
     expect(result.priorities.map((item) => item.partId)).toEqual([
-      'uuid-alpha',
-      'uuid-zebra',
+      "uuid-alpha",
+      "uuid-zebra",
     ]);
   });
 
-  it('handles negative stock by keeping projectedStock negative and urgency high', async () => {
+  it("handles negative stock by keeping projectedStock negative and urgency high", async () => {
     const negativeStockPart = makePart({
-      id: 'uuid-negative',
-      name: 'Peca Estoque Negativo',
+      id: "uuid-negative",
+      name: "Peca Estoque Negativo",
       currentStock: -5,
       minimumStock: 10,
       averageDailySales: 2,
@@ -196,8 +205,8 @@ describe('GetRestockPrioritiesUseCase', () => {
 
     expect(result.priorities).toEqual([
       {
-        partId: 'uuid-negative',
-        name: 'Peca Estoque Negativo',
+        partId: "uuid-negative",
+        name: "Peca Estoque Negativo",
         currentStock: -5,
         projectedStock: -11,
         minimumStock: 10,
@@ -206,10 +215,10 @@ describe('GetRestockPrioritiesUseCase', () => {
     ]);
   });
 
-  it('handles zero sales with expectedConsumption equal to zero', async () => {
+  it("handles zero sales with expectedConsumption equal to zero", async () => {
     const zeroSalesNeedsRestock = makePart({
-      id: 'uuid-zero-sales-1',
-      name: 'Peca Venda Zero Repor',
+      id: "uuid-zero-sales-1",
+      name: "Peca Venda Zero Repor",
       currentStock: 8,
       minimumStock: 10,
       averageDailySales: 0,
@@ -217,8 +226,8 @@ describe('GetRestockPrioritiesUseCase', () => {
       criticalityLevel: CriticalityLevel.MEDIUM,
     });
     const zeroSalesNoRestock = makePart({
-      id: 'uuid-zero-sales-2',
-      name: 'Peca Venda Zero Saudavel',
+      id: "uuid-zero-sales-2",
+      name: "Peca Venda Zero Saudavel",
       currentStock: 10,
       minimumStock: 10,
       averageDailySales: 0,
@@ -236,8 +245,8 @@ describe('GetRestockPrioritiesUseCase', () => {
 
     expect(result.priorities).toEqual([
       {
-        partId: 'uuid-zero-sales-1',
-        name: 'Peca Venda Zero Repor',
+        partId: "uuid-zero-sales-1",
+        name: "Peca Venda Zero Repor",
         currentStock: 8,
         projectedStock: 8,
         minimumStock: 10,
@@ -246,10 +255,10 @@ describe('GetRestockPrioritiesUseCase', () => {
     ]);
   });
 
-  it('handles high lead time with proportionally higher urgency score', async () => {
+  it("handles high lead time with proportionally higher urgency score", async () => {
     const highLeadTimePart = makePart({
-      id: 'uuid-high-lead',
-      name: 'Peca Lead Time Alto',
+      id: "uuid-high-lead",
+      name: "Peca Lead Time Alto",
       currentStock: 500,
       minimumStock: 100,
       averageDailySales: 7,
@@ -264,8 +273,8 @@ describe('GetRestockPrioritiesUseCase', () => {
 
     expect(result.priorities).toEqual([
       {
-        partId: 'uuid-high-lead',
-        name: 'Peca Lead Time Alto',
+        partId: "uuid-high-lead",
+        name: "Peca Lead Time Alto",
         currentStock: 500,
         projectedStock: -2055,
         minimumStock: 100,

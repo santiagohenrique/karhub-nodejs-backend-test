@@ -1,8 +1,8 @@
 import {
   CriticalityLevel,
   PartCategory,
-} from '../../../../domain/entities/part';
-import { Type } from 'class-transformer';
+} from "../../../../domain/entities/part";
+import { Type } from "class-transformer";
 import {
   IsEnum,
   IsInt,
@@ -12,7 +12,7 @@ import {
   IsString,
   MaxLength,
   Min,
-} from 'class-validator';
+} from "class-validator";
 
 export class UpdatePartDto {
   @IsOptional()

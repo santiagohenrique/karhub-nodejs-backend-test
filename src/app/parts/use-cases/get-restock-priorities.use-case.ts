@@ -22,7 +22,7 @@ export class GetRestockPrioritiesUseCase {
   constructor(
     @Inject(PART_REPOSITORY)
     private readonly partRepository: PartRepository,
-  ) { }
+  ) {}
 
   async execute(): Promise<GetRestockPrioritiesUseCaseOutput> {
     const allParts = await this.fetchAllParts();
@@ -49,7 +49,7 @@ export class GetRestockPrioritiesUseCase {
       });
 
     const priorities = prioritizedParts.map((part) => ({
-      partId: part.id ?? '',
+      partId: part.id ?? "",
       name: part.name,
       currentStock: part.currentStock,
       projectedStock: part.projectedStock(),

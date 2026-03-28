@@ -6,9 +6,21 @@ import { DeletePartUseCase } from "@/src/app/parts/use-cases/delete-part.use-cas
 import { GetPartByIdUseCase } from "@/src/app/parts/use-cases/get-part-by-id.use-case";
 import { ListPartsUseCase } from "@/src/app/parts/use-cases/list-parts.use-case";
 import { UpdatePartUseCase } from "@/src/app/parts/use-cases/update-part.use-case";
-import { Controller, Post, Body, Get, Query, Param, ParseUUIDPipe, Patch, Delete, HttpCode, HttpStatus } from "@nestjs/common";
+import {
+  Controller,
+  Post,
+  Body,
+  Get,
+  Query,
+  Param,
+  ParseUUIDPipe,
+  Patch,
+  Delete,
+  HttpCode,
+  HttpStatus,
+} from "@nestjs/common";
 
-@Controller('parts')
+@Controller("parts")
 export class PartsController {
   constructor(
     private readonly createPartUseCase: CreatePartUseCase,
@@ -28,22 +40,22 @@ export class PartsController {
     return this.listPartsUseCase.execute(query);
   }
 
-  @Get(':id')
-  async findById(@Param('id', ParseUUIDPipe) id: string) {
+  @Get(":id")
+  async findById(@Param("id", ParseUUIDPipe) id: string) {
     return this.getPartByIdUseCase.execute({ id });
   }
 
-  @Patch(':id')
+  @Patch(":id")
   async update(
-    @Param('id', ParseUUIDPipe) id: string,
+    @Param("id", ParseUUIDPipe) id: string,
     @Body() body: UpdatePartDto,
   ) {
     return this.updatePartUseCase.execute({ id, ...body });
   }
 
-  @Delete(':id')
+  @Delete(":id")
   @HttpCode(HttpStatus.NO_CONTENT)
-  async remove(@Param('id', ParseUUIDPipe) id: string): Promise<void> {
+  async remove(@Param("id", ParseUUIDPipe) id: string): Promise<void> {
     await this.deletePartUseCase.execute({ id });
   }
 }
