@@ -1,5 +1,7 @@
 export enum PartCategory {
   ENGINE = 'engine',
+  TRANSMISSION = 'transmission',
+  SUSPENSION = 'suspension',
 }
 
 export enum CriticalityLevel {
