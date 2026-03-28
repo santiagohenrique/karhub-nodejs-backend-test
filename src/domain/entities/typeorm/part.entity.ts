@@ -1,5 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import { CriticalityLevel, PartCategory } from '../part';
+import { PartCategory, CriticalityLevel } from "@/src/domain/entities/part";
+import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
 @Entity('parts')
 export class PartEntity {

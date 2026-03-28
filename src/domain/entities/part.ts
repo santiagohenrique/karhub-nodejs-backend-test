@@ -24,6 +24,10 @@ export interface PartProps {
   updatedAt?: Date;
 }
 
+export type PartUpdateProps = Partial<
+  Omit<PartProps, 'id' | 'createdAt' | 'updatedAt'>
+>;
+
 export class Part {
   constructor(private readonly props: PartProps) {}
 
@@ -77,6 +81,21 @@ export class Part {
 
   urgencyScore(): number {
     return (this.minimumStock - this.projectedStock()) * this.criticalityLevel;
+  }
+
+  update(changes: PartUpdateProps): Part {
+    return new Part({
+      ...this.props,
+      name: changes.name ?? this.props.name,
+      category: changes.category ?? this.props.category,
+      currentStock: changes.currentStock ?? this.props.currentStock,
+      minimumStock: changes.minimumStock ?? this.props.minimumStock,
+      averageDailySales:
+        changes.averageDailySales ?? this.props.averageDailySales,
+      leadTimeDays: changes.leadTimeDays ?? this.props.leadTimeDays,
+      unitCost: changes.unitCost ?? this.props.unitCost,
+      criticalityLevel: changes.criticalityLevel ?? this.props.criticalityLevel,
+    });
   }
 
   toPrimitives(): PartProps {

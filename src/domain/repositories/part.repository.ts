@@ -1,4 +1,4 @@
-import { Part, PartCategory } from '../entities/part';
+import { PartCategory, Part } from "@/src/domain/entities/part";
 
 export interface PartFilters {
   category?: PartCategory;
