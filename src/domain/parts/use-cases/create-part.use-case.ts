@@ -3,9 +3,9 @@ import {
   CriticalityLevel,
   PartProps,
   Part,
-} from "@/src/domain/entities/part";
-import type { PartRepository } from "@/src/domain/repositories/part.repository";
-import { PART_REPOSITORY } from "@/src/domain/repositories/part.repository.token";
+} from "@/src/domain/parts/entities/part";
+import type { PartRepository } from "@/src/domain/parts/repositories/part.repository";
+import { PART_REPOSITORY } from "@/src/domain/parts/repositories/part.repository.token";
 import { Injectable, Inject } from "@nestjs/common";
 
 export interface CreatePartUseCaseInput {

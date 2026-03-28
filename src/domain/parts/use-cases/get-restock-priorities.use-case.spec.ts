@@ -1,15 +1,15 @@
-import { GetRestockPrioritiesUseCase } from "@/src/app/parts/use-cases/get-restock-priorities.use-case";
+import { GetRestockPrioritiesUseCase } from "@/src/domain/parts/use-cases/get-restock-priorities.use-case";
 import {
   Part,
   PartProps,
   PartCategory,
   CriticalityLevel,
-} from "@/src/domain/entities/part";
+} from "@/src/domain/parts/entities/part";
 import {
   PartRepository,
   FindAllPartsQuery,
   FindAllPartsResult,
-} from "@/src/domain/repositories/part.repository";
+} from "@/src/domain/parts/repositories/part.repository";
 
 class InMemoryPartRepository implements PartRepository {
   constructor(private readonly parts: Part[]) {}

@@ -1,5 +1,5 @@
-import { Part } from "@/src/domain/entities/part";
-import { PartEntity } from "@/src/domain/entities/typeorm/part.entity";
+import { Part } from "@/src/domain/parts/entities/part";
+import { PartEntity } from "@/src/domain/parts/entities/typeorm/part.entity";
 
 export class PartTypeOrmMapper {
   static toDomain(entity: PartEntity): Part {

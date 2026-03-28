@@ -1,4 +1,4 @@
-import { PartCategory } from "@/src/domain/entities/part";
+import { PartCategory } from "@/src/domain/parts/entities/part";
 import { PaginationQueryDto } from "@/src/shared/pagination/pagination-query.dto";
 import { IsOptional, IsEnum } from "class-validator";
 

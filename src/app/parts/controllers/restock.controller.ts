@@ -1,4 +1,4 @@
-import { GetRestockPrioritiesUseCase } from "@/src/app/parts/use-cases/get-restock-priorities.use-case";
+import { GetRestockPrioritiesUseCase } from "@/src/domain/parts/use-cases/get-restock-priorities.use-case";
 import { Controller, Get } from "@nestjs/common";
 
 @Controller("restock")

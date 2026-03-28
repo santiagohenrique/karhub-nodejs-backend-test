@@ -1,6 +1,6 @@
 import "dotenv/config";
 import "reflect-metadata";
-import { PartEntity } from "@/src/domain/entities/typeorm/part.entity";
+import { PartEntity } from "@/src/domain/parts/entities/typeorm/part.entity";
 import { join } from "path";
 import { DataSource } from "typeorm";
 

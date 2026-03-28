@@ -1,7 +1,7 @@
 import {
   CriticalityLevel,
   PartCategory,
-} from "../../../../domain/entities/part";
+} from "@/src/domain/parts/entities/part";
 import { Type } from "class-transformer";
 import {
   IsEnum,

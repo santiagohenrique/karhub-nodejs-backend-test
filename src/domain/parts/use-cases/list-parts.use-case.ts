@@ -1,9 +1,9 @@
-import { PartProps } from "@/src/domain/entities/part";
+import { PartProps } from "@/src/domain/parts/entities/part";
 import type {
   PartFilters,
   PartRepository,
-} from "@/src/domain/repositories/part.repository";
-import { PART_REPOSITORY } from "@/src/domain/repositories/part.repository.token";
+} from "@/src/domain/parts/repositories/part.repository";
+import { PART_REPOSITORY } from "@/src/domain/parts/repositories/part.repository.token";
 import {
   DEFAULT_LIMIT,
   DEFAULT_PAGE,

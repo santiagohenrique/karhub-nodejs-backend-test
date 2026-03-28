@@ -1,7 +1,7 @@
 import { Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
 import { AppController } from "@/src/app.controller";
-import { PartsModule } from "@/src/app/parts/parts.module";
+import { PartsModule } from "@/src/domain/parts/parts.module";
 import { DatabaseModule } from "@/src/infra/database/database.module";
 
 @Module({

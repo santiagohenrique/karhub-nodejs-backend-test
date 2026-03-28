@@ -1,12 +1,15 @@
-import { PartCategory, CriticalityLevel } from "@/src/domain/entities/part";
-import { PartEntity } from "@/src/domain/entities/typeorm/part.entity";
+import {
+  PartCategory,
+  CriticalityLevel,
+} from "@/src/domain/parts/entities/part";
+import { PartEntity } from "@/src/domain/parts/entities/typeorm/part.entity";
 import { DataSource } from "typeorm";
 
-type SeedPart = Omit<PartEntity, 'id' | 'createdAt' | 'updatedAt'>;
+type SeedPart = Omit<PartEntity, "id" | "createdAt" | "updatedAt">;
 
 const PARTS_SEED: SeedPart[] = [
   {
-    name: 'Filtro de Oleo Premium',
+    name: "Filtro de Oleo Premium",
     category: PartCategory.ENGINE,
     currentStock: 15,
     minimumStock: 20,
@@ -16,7 +19,7 @@ const PARTS_SEED: SeedPart[] = [
     criticalityLevel: CriticalityLevel.MEDIUM,
   },
   {
-    name: 'Velas de Ignicao Iridium',
+    name: "Velas de Ignicao Iridium",
     category: PartCategory.ENGINE,
     currentStock: 22,
     minimumStock: 18,
@@ -26,7 +29,7 @@ const PARTS_SEED: SeedPart[] = [
     criticalityLevel: CriticalityLevel.HIGH,
   },
   {
-    name: 'Bomba de Oleo',
+    name: "Bomba de Oleo",
     category: PartCategory.ENGINE,
     currentStock: 6,
     minimumStock: 12,
@@ -36,7 +39,7 @@ const PARTS_SEED: SeedPart[] = [
     criticalityLevel: CriticalityLevel.VERY_HIGH,
   },
   {
-    name: 'Correia Dentada',
+    name: "Correia Dentada",
     category: PartCategory.ENGINE,
     currentStock: 18,
     minimumStock: 25,
@@ -46,7 +49,7 @@ const PARTS_SEED: SeedPart[] = [
     criticalityLevel: CriticalityLevel.HIGH,
   },
   {
-    name: 'Junta do Cabecote',
+    name: "Junta do Cabecote",
     category: PartCategory.ENGINE,
     currentStock: 9,
     minimumStock: 10,
@@ -56,7 +59,7 @@ const PARTS_SEED: SeedPart[] = [
     criticalityLevel: CriticalityLevel.VERY_HIGH,
   },
   {
-    name: 'Sensor de Rotacao',
+    name: "Sensor de Rotacao",
     category: PartCategory.ENGINE,
     currentStock: 12,
     minimumStock: 15,
@@ -66,7 +69,7 @@ const PARTS_SEED: SeedPart[] = [
     criticalityLevel: CriticalityLevel.MEDIUM,
   },
   {
-    name: 'Bomba de Agua',
+    name: "Bomba de Agua",
     category: PartCategory.ENGINE,
     currentStock: 11,
     minimumStock: 16,
@@ -76,7 +79,7 @@ const PARTS_SEED: SeedPart[] = [
     criticalityLevel: CriticalityLevel.HIGH,
   },
   {
-    name: 'Valvula Termostatica',
+    name: "Valvula Termostatica",
     category: PartCategory.ENGINE,
     currentStock: 20,
     minimumStock: 15,
@@ -86,7 +89,7 @@ const PARTS_SEED: SeedPart[] = [
     criticalityLevel: CriticalityLevel.LOW,
   },
   {
-    name: 'Retentor do Virabrequim',
+    name: "Retentor do Virabrequim",
     category: PartCategory.ENGINE,
     currentStock: 14,
     minimumStock: 12,
@@ -96,7 +99,7 @@ const PARTS_SEED: SeedPart[] = [
     criticalityLevel: CriticalityLevel.LOW,
   },
   {
-    name: 'Coxim do Motor',
+    name: "Coxim do Motor",
     category: PartCategory.ENGINE,
     currentStock: 7,
     minimumStock: 10,

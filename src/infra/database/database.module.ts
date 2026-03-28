@@ -1,4 +1,4 @@
-import { PartEntity } from "@/src/domain/entities/typeorm/part.entity";
+import { PartEntity } from "@/src/domain/parts/entities/typeorm/part.entity";
 import { Module } from "@nestjs/common";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { TypeOrmModule } from "@nestjs/typeorm";

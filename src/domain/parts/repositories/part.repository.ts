@@ -1,4 +1,4 @@
-import { PartCategory, Part } from "@/src/domain/entities/part";
+import { PartCategory, Part } from "@/src/domain/parts/entities/part";
 import {
   PaginationParams,
   PaginatedData,

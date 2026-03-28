@@ -7,7 +7,7 @@ async function run(): Promise<void> {
     const result = await seedPartsOnce(dataSource);
 
     if (result.skipped) {
-      console.log('Seed was skipped.');
+      console.log("Seed was skipped.");
       return;
     }
 
@@ -15,7 +15,7 @@ async function run(): Promise<void> {
       `Seed completed successfully. Inserted ${result.inserted} parts.`,
     );
   } catch (error) {
-    console.error('Error occurred while running part seed:', error);
+    console.error("Error occurred while running part seed:", error);
     process.exitCode = 1;
   } finally {
     if (dataSource.isInitialized) {

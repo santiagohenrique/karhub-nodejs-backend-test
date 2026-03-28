@@ -1,11 +1,11 @@
 import { CreatePartDto } from "@/src/app/parts/controllers/dto/create-part.dto";
 import { ListPartsQueryDto } from "@/src/app/parts/controllers/dto/list-parts-query.dto";
 import { UpdatePartDto } from "@/src/app/parts/controllers/dto/update-part.dto";
-import { CreatePartUseCase } from "@/src/app/parts/use-cases/create-part.use-case";
-import { DeletePartUseCase } from "@/src/app/parts/use-cases/delete-part.use-case";
-import { GetPartByIdUseCase } from "@/src/app/parts/use-cases/get-part-by-id.use-case";
-import { ListPartsUseCase } from "@/src/app/parts/use-cases/list-parts.use-case";
-import { UpdatePartUseCase } from "@/src/app/parts/use-cases/update-part.use-case";
+import { CreatePartUseCase } from "@/src/domain/parts/use-cases/create-part.use-case";
+import { DeletePartUseCase } from "@/src/domain/parts/use-cases/delete-part.use-case";
+import { GetPartByIdUseCase } from "@/src/domain/parts/use-cases/get-part-by-id.use-case";
+import { ListPartsUseCase } from "@/src/domain/parts/use-cases/list-parts.use-case";
+import { UpdatePartUseCase } from "@/src/domain/parts/use-cases/update-part.use-case";
 import {
   Controller,
   Post,
