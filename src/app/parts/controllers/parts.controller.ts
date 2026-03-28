@@ -6,20 +6,20 @@ import { GetPartByIdUseCase } from '@/src/app/parts/use-cases/get-part-by-id.use
 import { ListPartsUseCase } from '@/src/app/parts/use-cases/list-parts.use-case';
 import { UpdatePartUseCase } from '@/src/app/parts/use-cases/update-part.use-case';
 import { PartCategory } from '@/src/domain/entities/part';
+import { PaginationQueryDto } from '@/src/shared/pagination/pagination-query.dto';
 import {
-  Controller,
-  Post,
   Body,
-  Get,
-  Query,
-  ParseEnumPipe,
-  Param,
-  ParseUUIDPipe,
-  Patch,
-  Put,
+  Controller,
   Delete,
+  Get,
   HttpCode,
   HttpStatus,
+  Param,
+  ParseEnumPipe,
+  ParseUUIDPipe,
+  Patch,
+  Post,
+  Query,
 } from '@nestjs/common';
 
 @Controller('parts')
@@ -30,7 +30,7 @@ export class PartsController {
     private readonly getPartByIdUseCase: GetPartByIdUseCase,
     private readonly updatePartUseCase: UpdatePartUseCase,
     private readonly deletePartUseCase: DeletePartUseCase,
-  ) { }
+  ) {}
 
   @Post()
   async create(@Body() body: CreatePartDto) {
@@ -39,10 +39,14 @@ export class PartsController {
 
   @Get()
   async findAll(
+    @Query() pagination: PaginationQueryDto,
     @Query('category', new ParseEnumPipe(PartCategory, { optional: true }))
     category?: PartCategory,
   ) {
-    return this.listPartsUseCase.execute({ category });
+    return this.listPartsUseCase.execute({
+      ...pagination,
+      category,
+    });
   }
 
   @Get(':id')
