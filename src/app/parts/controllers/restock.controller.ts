@@ -3,7 +3,7 @@ import { GetRestockPrioritiesUseCase } from "@/src/domain/parts/use-cases/get-re
 import { Controller, Get } from "@nestjs/common";
 import { ApiOkResponse, ApiOperation, ApiTags } from "@nestjs/swagger";
 
-@ApiTags("restock")
+@ApiTags("Restock - Ordenação de peças por prioridade")
 @Controller("restock")
 export class RestockController {
   constructor(
