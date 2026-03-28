@@ -60,7 +60,16 @@ Observação: o seed só insere os dados se a tabela `parts` estiver vazia.
 API local:
 
 - Base URL: `http://localhost:3000/api`
-- Swagger: `http://localhost:3000/api/docs`
+
+## Exemplo rápido de requisição
+
+```bash
+curl --request GET "http://localhost:3000/api/restock/priorities"
+```
+
+Para mais detalhes (payloads, parâmetros, respostas e códigos HTTP), consulte o Swagger:
+
+- `http://localhost:3000/api/docs`
 
 ## Rodar testes
 
