@@ -177,4 +177,100 @@ describe('GetRestockPrioritiesUseCase', () => {
       'uuid-zebra',
     ]);
   });
+
+  it('handles negative stock by keeping projectedStock negative and urgency high', async () => {
+    const negativeStockPart = makePart({
+      id: 'uuid-negative',
+      name: 'Peca Estoque Negativo',
+      currentStock: -5,
+      minimumStock: 10,
+      averageDailySales: 2,
+      leadTimeDays: 3,
+      criticalityLevel: CriticalityLevel.HIGH,
+    });
+
+    const repository = new InMemoryPartRepository([negativeStockPart]);
+    const useCase = new GetRestockPrioritiesUseCase(repository);
+
+    const result = await useCase.execute();
+
+    expect(result.priorities).toEqual([
+      {
+        partId: 'uuid-negative',
+        name: 'Peca Estoque Negativo',
+        currentStock: -5,
+        projectedStock: -11,
+        minimumStock: 10,
+        urgencyScore: 84,
+      },
+    ]);
+  });
+
+  it('handles zero sales with expectedConsumption equal to zero', async () => {
+    const zeroSalesNeedsRestock = makePart({
+      id: 'uuid-zero-sales-1',
+      name: 'Peca Venda Zero Repor',
+      currentStock: 8,
+      minimumStock: 10,
+      averageDailySales: 0,
+      leadTimeDays: 30,
+      criticalityLevel: CriticalityLevel.MEDIUM,
+    });
+    const zeroSalesNoRestock = makePart({
+      id: 'uuid-zero-sales-2',
+      name: 'Peca Venda Zero Saudavel',
+      currentStock: 10,
+      minimumStock: 10,
+      averageDailySales: 0,
+      leadTimeDays: 30,
+      criticalityLevel: CriticalityLevel.HIGH,
+    });
+
+    const repository = new InMemoryPartRepository([
+      zeroSalesNeedsRestock,
+      zeroSalesNoRestock,
+    ]);
+    const useCase = new GetRestockPrioritiesUseCase(repository);
+
+    const result = await useCase.execute();
+
+    expect(result.priorities).toEqual([
+      {
+        partId: 'uuid-zero-sales-1',
+        name: 'Peca Venda Zero Repor',
+        currentStock: 8,
+        projectedStock: 8,
+        minimumStock: 10,
+        urgencyScore: 6,
+      },
+    ]);
+  });
+
+  it('handles high lead time with proportionally higher urgency score', async () => {
+    const highLeadTimePart = makePart({
+      id: 'uuid-high-lead',
+      name: 'Peca Lead Time Alto',
+      currentStock: 500,
+      minimumStock: 100,
+      averageDailySales: 7,
+      leadTimeDays: 365,
+      criticalityLevel: CriticalityLevel.VERY_HIGH,
+    });
+
+    const repository = new InMemoryPartRepository([highLeadTimePart]);
+    const useCase = new GetRestockPrioritiesUseCase(repository);
+
+    const result = await useCase.execute();
+
+    expect(result.priorities).toEqual([
+      {
+        partId: 'uuid-high-lead',
+        name: 'Peca Lead Time Alto',
+        currentStock: 500,
+        projectedStock: -2055,
+        minimumStock: 100,
+        urgencyScore: 10775,
+      },
+    ]);
+  });
 });
