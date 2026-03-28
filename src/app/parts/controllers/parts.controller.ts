@@ -1,26 +1,12 @@
-import { CreatePartDto } from '@/src/app/parts/controllers/dto/create-part.dto';
-import { UpdatePartDto } from '@/src/app/parts/controllers/dto/update-part.dto';
-import { CreatePartUseCase } from '@/src/app/parts/use-cases/create-part.use-case';
-import { DeletePartUseCase } from '@/src/app/parts/use-cases/delete-part.use-case';
-import { GetPartByIdUseCase } from '@/src/app/parts/use-cases/get-part-by-id.use-case';
-import { ListPartsUseCase } from '@/src/app/parts/use-cases/list-parts.use-case';
-import { UpdatePartUseCase } from '@/src/app/parts/use-cases/update-part.use-case';
-import { PartCategory } from '@/src/domain/entities/part';
-import { PaginationQueryDto } from '@/src/shared/pagination/pagination-query.dto';
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  HttpCode,
-  HttpStatus,
-  Param,
-  ParseEnumPipe,
-  ParseUUIDPipe,
-  Patch,
-  Post,
-  Query,
-} from '@nestjs/common';
+import { CreatePartDto } from "@/src/app/parts/controllers/dto/create-part.dto";
+import { ListPartsQueryDto } from "@/src/app/parts/controllers/dto/list-parts-query.dto";
+import { UpdatePartDto } from "@/src/app/parts/controllers/dto/update-part.dto";
+import { CreatePartUseCase } from "@/src/app/parts/use-cases/create-part.use-case";
+import { DeletePartUseCase } from "@/src/app/parts/use-cases/delete-part.use-case";
+import { GetPartByIdUseCase } from "@/src/app/parts/use-cases/get-part-by-id.use-case";
+import { ListPartsUseCase } from "@/src/app/parts/use-cases/list-parts.use-case";
+import { UpdatePartUseCase } from "@/src/app/parts/use-cases/update-part.use-case";
+import { Controller, Post, Body, Get, Query, Param, ParseUUIDPipe, Patch, Delete, HttpCode, HttpStatus } from "@nestjs/common";
 
 @Controller('parts')
 export class PartsController {
@@ -38,15 +24,8 @@ export class PartsController {
   }
 
   @Get()
-  async findAll(
-    @Query() pagination: PaginationQueryDto,
-    @Query('category', new ParseEnumPipe(PartCategory, { optional: true }))
-    category?: PartCategory,
-  ) {
-    return this.listPartsUseCase.execute({
-      ...pagination,
-      category,
-    });
+  async findAll(@Query() query: ListPartsQueryDto) {
+    return this.listPartsUseCase.execute(query);
   }
 
   @Get(':id')
